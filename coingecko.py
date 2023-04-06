@@ -63,7 +63,7 @@ class TopCoins(QtWidgets.QWidget):
             symbol = coin['symbol'].upper()
             ratio = coin['total_volume'] / coin['market_cap']
 
-            self.coins_data.append(f"{name} ({symbol}), Volume to Market Cap Ratio: {ratio:.6f}")
+            self.coins_data.append("{} ({}, Volume to Market Cap Ratio: {:.6f})".format(name, symbol, ratio))
 
     def update_label(self, data):
         self.label.setText(data)
