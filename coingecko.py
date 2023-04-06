@@ -44,26 +44,26 @@ class TopCoins(QtWidgets.QWidget):
         self.update_data()
 
     def update_data(self):
-        self.coins_data.clear()
+    self.coins_data.clear()
 
-        # Get coin market data for all coins
-        coins_data = self.cg.get_coins_markets(vs_currency='usd')
+    # Get coin market data for all coins
+    coins_data = self.cg.get_coins_markets(vs_currency='usd')
 
-        # Filter only coins with a market cap of 50 million or above
-        filtered_coins_data = [coin for coin in coins_data if coin['market_cap'] >= 50000000]
+    # Filter only coins with a market cap of 50 million or above
+    filtered_coins_data = [coin for coin in coins_data if coin['market_cap'] >= 50000000]
 
-        # Sort by volume to market cap ratio in the last 24 hours
-        sorted_coins_data = sorted(filtered_coins_data, key=lambda x: x['total_volume']/x['market_cap'], reverse=True)
+    # Sort by volume to market cap ratio in the last 24 hours
+    sorted_coins_data = sorted(filtered_coins_data, key=lambda x: x['total_volume']/x['market_cap'], reverse=True)
 
-        # Get top 10 coins
-        top_coins_data = sorted_coins_data[:10]
+    # Get top 10 coins
+    top_coins_data = sorted_coins_data[:10]
 
-        for coin in top_coins_data:
-            name = coin['name']
-            symbol = coin['symbol'].upper()
-            ratio = coin['total_volume'] / coin['market_cap']
+    for coin in top_coins_data:
+        name = coin['name']
+        symbol = coin['symbol'].upper()
+        ratio = coin['total_volume'] / coin['market_cap']
 
-            self.coins_data.append("{} ({}, Volume to Market Cap Ratio: {:.6f})".format(name, symbol, ratio))
+        self.coins_data.append("{} ({}) - Volume to Market Cap Ratio: {:.6f}".format(name, symbol, ratio))
 
     def update_label(self, data):
         self.label.setText(data)
